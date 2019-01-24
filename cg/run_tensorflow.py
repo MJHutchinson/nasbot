@@ -10,9 +10,13 @@ import tensorflow as tf
 import os
 
 # To remove the tensorflow compilation warnings
-os.environ['TF_CPP_MIN_LOG_LEVEL']='2'
+# os.environ['TF_CPP_MIN_LOG_LEVEL']='2'
 
-tf.logging.set_verbosity(tf.logging.INFO)
+os.environ['TF_CPP_MIN_LOG_LEVEL']='4'
+tf.logging.set_verbosity(tf.logging.ERROR)
+
+
+# tf.logging.set_verbosity(tf.logging.INFO)
 
 activation_dict = {'relu':tf.nn.relu,
                 'elu':tf.nn.elu,
@@ -172,6 +176,6 @@ def compute_validation_error(mlp,data_train,data_vali,gpu_id,params, tmp_dir):
         neg_vali_errors.append(-1*model.evaluate(vali_input_fn,steps=params['valiNumStepsPerLoop'])['mse'])
       elif mlp.class_or_reg=='class':
         neg_vali_errors.append(model.evaluate(vali_input_fn,steps=params['valiNumStepsPerLoop'])['accuracy'])
-      print('Finished iter: ' + str((loop+1)*params['trainNumStepsPerLoop']))
+      print(f'GPU id: {gpu_id}  Finished iter: ' + str((loop+1)*params['trainNumStepsPerLoop']) + f' of {(params["numLoops"])*params["trainNumStepsPerLoop"]}')
 
   return max(neg_vali_errors)
