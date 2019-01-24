@@ -14,7 +14,7 @@ from nn import nn_constraint_checkers
 from nn import nn_modifiers
 from nn.neural_network import NeuralNetwork
 from nn.nn_visualise import visualise_nn
-from unittest_neural_network import generate_cnn_architectures, generate_mlp_architectures
+from nn.unittest_neural_network import generate_cnn_architectures, generate_mlp_architectures
 from utils.base_test_class import BaseTestClass, execute_tests
 
 
@@ -28,7 +28,9 @@ def test_if_two_networks_are_equal(net1, net2, false_if_net1_is_net2=True):
     val1 = net1.__dict__[key]
     val2 = net2.__dict__[key]
     is_true = True
-    if isinstance(val1, dict):
+    if isinstance(val1, (int, float, str)):
+      is_true = is_true and (val1 == val2) # Michael (mjh252@cam.ac.uk) - python 3 does not deepcopy atomics
+    elif isinstance(val1, dict):
       if false_if_net1_is_net2:
         is_true = is_true and (val1 is not val2)
       for val_key in val1.keys():
@@ -103,7 +105,7 @@ class NNModifierTestCase(BaseTestClass):
       report_str = '%d (%s n=%d,m=%d):: '%(idx, nn.nn_class, nn.num_layers,
                                            nn.get_total_num_edges())
       total_num_primitives = 0
-      for _, list_or_prims in primitives.iteritems():
+      for _, list_or_prims in primitives.items():
         report_str += '%d, '%(len(list_or_prims))
         total_num_primitives += len(list_or_prims)
       report_str += 'tot=%d'%(total_num_primitives)

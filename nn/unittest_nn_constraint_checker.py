@@ -9,7 +9,7 @@
 
 # Local imports
 from nn import nn_constraint_checkers
-from unittest_neural_network import generate_cnn_architectures, generate_mlp_architectures
+from nn.unittest_neural_network import generate_cnn_architectures, generate_mlp_architectures
 from utils.base_test_class import BaseTestClass, execute_tests
 
 

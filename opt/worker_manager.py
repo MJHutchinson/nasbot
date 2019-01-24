@@ -10,7 +10,6 @@ from argparse import Namespace
 from multiprocessing import Process
 import numpy as np
 import os
-from sets import Set
 import shutil
 import time
 # Local
@@ -233,7 +232,7 @@ class RealWorkerManager(WorkerManager):
       return
     self._delete_and_create_dirs(self.result_dir_names.values())
     self._delete_dirs(self.working_dir_names.values())
-    self.free_workers = Set(self.worker_ids)
+    self.free_workers = set(self.worker_ids)
     self.qinfos_in_progress = {wid:None for wid in self.worker_ids}
     self.worker_processes = {wid:None for wid in self.worker_ids}
 
@@ -326,7 +325,7 @@ class RealWorkerManager(WorkerManager):
     if self.qinfos_in_progress[worker_id] is not None:
       err_msg = 'qinfos_in_progress: %s,\nfree_workers: %s.'%(
                    str(self.qinfos_in_progress), str(self.free_workers))
-      print err_msg
+      print(err_msg)
       raise ValueError('Check if worker is free before sending evaluation.')
     # First add all the data to qinfo
     qinfo.worker_id = worker_id

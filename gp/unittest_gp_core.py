@@ -126,7 +126,7 @@ class GPTestCase(BaseTestClass):
       curr_gp = build_gp_with_dataset(dataset)
       pred, stds = curr_gp.eval(dataset[3], 'std')
       # Add hallucinations
-      X_halluc = np.random.random((max(dataset[0].shape[0]/10, 5), dataset[0].shape[1]))
+      X_halluc = np.random.random((max(int(dataset[0].shape[0]/10), 5), dataset[0].shape[1]))
       ha_pred, ha_stds = curr_gp.eval_with_hallucinated_observations(dataset[3], X_halluc,
                                   'std')
       assert np.linalg.norm(pred - ha_pred) <= 1e-5

@@ -12,7 +12,7 @@ from argparse import Namespace
 import time
 import numpy as np
 # Local imports
-from function_caller import EVAL_ERROR_CODE
+from opt.function_caller import EVAL_ERROR_CODE
 from nn.nn_examples import generate_many_neural_networks
 from utils.option_handler import get_option_specs, load_options
 from utils.reporters import get_reporter
@@ -188,7 +188,7 @@ class BlackboxOptimiser(object):
       self.pre_eval_points = self.options.pre_eval_points
       self.num_pre_eval_points = len(self.options.pre_eval_points)
       self.curr_opt_val = max(self.pre_eval_vals)
-      self.curr_opt_pt = self.pre_eval_points[np.argmax(self.pre_eval_points)]
+      self.curr_opt_pt = self.pre_eval_points[np.argmax(self.pre_eval_vals)]
       self.pre_eval_true_vals = self.options.pre_eval_true_vals
       self.curr_true_opt_val = max(self.pre_eval_true_vals)
       self.curr_true_opt_pt = self.pre_eval_points[np.argmax(self.pre_eval_true_vals)]

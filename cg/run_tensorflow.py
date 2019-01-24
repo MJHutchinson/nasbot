@@ -42,7 +42,7 @@ def mlp_definition(features,nn,num_classes):
 
   # Loop over layers and build tensorflow network
   for lidx in range(1,nn.num_internal_layers+1):
-    plist = get_layer_parents(nn.conn_mat.viewkeys(),lidx)
+    plist = get_layer_parents(nn.conn_mat.keys(),lidx)
     # Define or concatenate parents
     parent_layers = [layers[i] for i in plist]
     input_layer = tf.concat(parent_layers,1)  ### NEED TO VERIFY CONCAT ALONG AXIS 1
@@ -55,7 +55,7 @@ def mlp_definition(features,nn,num_classes):
     layers.append(tf.layers.dense(input_layer,num_units,use_bias=True,activation=activation_dict[act_str]))
 
   # Define output layer
-  plist = get_layer_parents(nn.conn_mat.viewkeys(),lidx+1)
+  plist = get_layer_parents(nn.conn_mat.keys(),lidx+1)
   parent_layers = [layers[i] for i in plist]
   #scalar_mult = tf.Variable(1./(len(plist)+1),tf.float32) ### NEED TO VERIFY FLOAT 32
   scalar_mult = tf.Variable(1./len(plist),tf.float32) ### NEED TO VERIFY FLOAT 32

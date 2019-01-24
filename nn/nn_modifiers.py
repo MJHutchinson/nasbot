@@ -14,7 +14,7 @@ from argparse import Namespace
 from copy import deepcopy
 import numpy as np
 # Local imports
-from neural_network import ConvNeuralNetwork, MultiLayerPerceptron, MLP_RECTIFIERS, \
+from nn.neural_network import ConvNeuralNetwork, MultiLayerPerceptron, MLP_RECTIFIERS, \
                            MLP_SIGMOIDS, is_a_pooling_layer_label, is_a_conv_layer_label,\
                            CNNImageSizeMismatchException, CNNNoConvAfterIPException
 from utils.general_utils import reorder_list_or_array, reorder_rows_and_cols_in_matrix
@@ -718,8 +718,8 @@ def modify_several_layers(nn, inc_or_dec, layer_group_desc,
   # Now decide which groups to change
   num_groups = int(layer_group_desc[-1])
   group_idx = int(layer_group_desc[0])
-  start_idx = (group_idx - 1) * num_modifiable_layers / num_groups
-  end_idx = group_idx * num_modifiable_layers / num_groups
+  start_idx = int((group_idx - 1) * num_modifiable_layers / num_groups)
+  end_idx = int(group_idx * num_modifiable_layers / num_groups)
   modify_layer_idxs = modifiable_layers[start_idx:end_idx]
   modify_vals = [round(change_ratio * nn.num_units_in_each_layer[i])
                  for i in modify_layer_idxs]
@@ -875,9 +875,9 @@ class NNModifier(object):
     if not hasattr(list_of_nns, '__iter__'):
       list_of_nns = [list_of_nns]
     # determine num_steps_probs
-    if num_steps_probs is None and isinstance(max_num_steps, (int, long, float)):
+    if num_steps_probs is None and isinstance(max_num_steps, (int, float)):
       num_steps_probs = np.ones((max_num_steps,))/float(max_num_steps)
-    elif isinstance(num_steps_probs, (int, long, float)):
+    elif isinstance(num_steps_probs, (int, float)):
       num_steps_probs = np.zeros((num_steps_probs,))
       num_steps_probs[-1] = 1.0
     # Determine how many modifications per nn
@@ -993,7 +993,7 @@ class NNModifier(object):
     else:
       prob_masses = np.array([type_prob_masses[key] for key in groups])
       prob_masses = prob_masses/prob_masses.sum()
-      modif_groups = np.random.choice(groups, max(2*num_single_step_modifications, 20),
+      modif_groups = np.random.choice(list(groups), max(2*num_single_step_modifications, 20),
                                       p=prob_masses)
       # Shuffle each list
       for grp in groups:

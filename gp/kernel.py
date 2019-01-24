@@ -53,7 +53,7 @@ class Kernel(object):
 
   def add_hyperparams(self, **kwargs):
     """ Set additional hyperparameters here. """
-    for key, value in kwargs.iteritems():
+    for key, value in kwargs.items():
       self.hyperparams[key] = value
 
 

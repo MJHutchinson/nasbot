@@ -45,7 +45,7 @@ MIN_NUM_UNITS_PER_LAYER = 8    # ... (neurons/conv-filters) per layer.
 
 # Which GPU IDs are available
 # GPU_IDS = [0, 1]
-GPU_IDS = [0, 3]
+GPU_IDS = [0]
 
 # Where to store temporary model checkpoints
 EXP_DIR = 'mlp_experiment_dir_%s'%(time.strftime('%Y%m%d%H%M%S'))
@@ -104,4 +104,3 @@ def main():
 
 if __name__ == '__main__':
   main()
-

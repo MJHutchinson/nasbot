@@ -10,7 +10,7 @@ import os
 # Local imports
 from nn import nn_visualise
 from utils.base_test_class import BaseTestClass, execute_tests
-from unittest_neural_network import generate_cnn_architectures, generate_mlp_architectures
+from nn.unittest_neural_network import generate_cnn_architectures, generate_mlp_architectures
 
 class NNVisualiseTestCase(BaseTestClass):
   """ Contains unit tests for the nn_visualise.py function. """

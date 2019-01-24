@@ -82,10 +82,10 @@ def stable_cholesky(M, add_to_diag_till_psd=True):
             ((10**diag_noise_power) * max_M)  * np.eye(M.shape[0]))
         chol_decomp_succ = True
       except np.linalg.linalg.LinAlgError:
-        print 'stable_cholesky failed with diag_noise_power=%d.'%(diag_noise_power)
+        print('stable_cholesky failed with diag_noise_power=%d.'.format(diag_noise_power))
         diag_noise_power += 1
       if diag_noise_power >= 5:
-        print 'Cholesky failed: Added diag noise = %e'%(diag_noise)
+        print('Cholesky failed: Added diag noise = %e'.format(diag_noise))
   return L
 
 

@@ -10,8 +10,8 @@
 import numpy as np
 # Local
 from utils.syn_functions import get_syn_function_caller_from_name
-from worker_manager import SyntheticWorkerManager
-import gp_bandit
+from opt.worker_manager import SyntheticWorkerManager
+import opt.gp_bandit as gp_bandit
 from gp.gp_instances import all_simple_gp_args
 # from nn.nn_gp import nn_gp_args
 from utils.base_test_class import BaseTestClass, execute_tests

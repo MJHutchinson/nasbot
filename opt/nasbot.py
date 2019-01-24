@@ -78,7 +78,7 @@ class NASBOT(GPBandit):
     if isinstance(mut_arg, list):
       self.ga_mutation_op = get_nn_modifier_from_args(self.domain.constraint_checker,
                                                       dflt_num_steps_probs=mut_arg)
-    elif isinstance(mut_arg, (int, long, float)):
+    elif isinstance(mut_arg, (int, float)):
       self.ga_mutation_op = get_nn_modifier_from_args(self.domain.constraint_checker,
                                                       dflt_max_num_steps=mut_arg)
     elif mut_arg.startswith('d'):
