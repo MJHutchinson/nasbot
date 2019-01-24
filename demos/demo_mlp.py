@@ -45,7 +45,7 @@ MIN_NUM_UNITS_PER_LAYER = 8    # ... (neurons/conv-filters) per layer.
 
 # Which GPU IDs are available
 # GPU_IDS = [0, 1]
-GPU_IDS = [0]
+GPU_IDS = [0,1,2,3,4,5,6,7]
 
 # Where to store temporary model checkpoints
 EXP_DIR = 'mlp_experiment_dir_%s'%(time.strftime('%Y%m%d%H%M%S'))
@@ -64,7 +64,7 @@ def get_train_file_name(dataset):
   return train_pickle_file
 
 # Specify the budget (in seconds)
-BUDGET = 2 * 24 * 60 * 60
+BUDGET = 1 * 8 * 60 * 60
 
 # Obtain a reporter object
 # REPORTER = get_reporter('default') # Writes results to stdout
